@@ -91,6 +91,22 @@ if ( ! class_exists( 'WP_Dev_FileSystem' ) ) :
 			return $wp_filesystem;
 		}
 
+		/**
+		 * Get content
+		 *
+		 * @since  1.0.0
+		 * 
+		 * @param  string $file    Genearte the file.
+		 * @return mixed
+		 */
+		public function get_contents( $file = '' ) {
+			if ( empty( $file ) ) {
+				return;
+			}
+
+			return $this->get_filesystem()->get_contents( $file );
+		}
+
 	}
 
 	/**
@@ -112,5 +128,20 @@ if( ! function_exists( 'wp_dev_fs_create_file' ) ) {
 	 */
 	function wp_dev_fs_create_file( $file = '', $content = '' ) {
 		WP_Dev_FileSystem::get_instance()->generate_file( $file, $content );
+	}
+}
+
+if( ! function_exists( 'wp_dev_fs_get_content' ) ) {
+	/**
+	 * Generate file
+	 * 
+	 * @since  1.0.0
+	 * 
+	 * @param  string $file    Genearte the file.
+	 * @param  string $content File contents.
+	 * @return void
+	 */
+	function wp_dev_fs_get_content( $file = '' ) {
+		WP_Dev_FileSystem::get_instance()->get_contents( $file );
 	}
 }
